@@ -1,0 +1,2202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1029</width>
+    <height>1110</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <family>맑은 고딕</family>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>3</number>
+    </property>
+    <property name="rightMargin">
+     <number>1</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_Form" stretch="0,0,1,0,0">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,7">
+          <item>
+           <widget class="QPushButton" name="pushButton_SelectTextFile">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>36</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>파일 선택</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_TextFilePath">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_20">
+        <item>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>메타데이터</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <property name="leftMargin">
+             <number>1</number>
+            </property>
+            <property name="topMargin">
+             <number>2</number>
+            </property>
+            <property name="rightMargin">
+             <number>1</number>
+            </property>
+            <property name="bottomMargin">
+             <number>2</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2020">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_9" stretch="1,3,0,1">
+                  <item>
+                   <layout class="QGridLayout" name="gridLayout_2">
+                    <item row="3" column="0">
+                     <widget class="QLabel" name="label_15">
+                      <property name="text">
+                       <string>ISBN:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="4" column="0">
+                     <widget class="QLabel" name="label_16">
+                      <property name="text">
+                       <string>---</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_8">
+                      <property name="text">
+                       <string>제목:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="QLineEdit" name="lineEdit_Title"/>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="QLineEdit" name="lineEdit_Author"/>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_9">
+                      <property name="text">
+                       <string>작가:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="5" column="0">
+                     <widget class="QLabel" name="label_17">
+                      <property name="text">
+                       <string>---</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="1">
+                     <widget class="QLineEdit" name="lineEdit_ISBN"/>
+                    </item>
+                    <item row="4" column="1">
+                     <widget class="QLineEdit" name="lineEdit_4"/>
+                    </item>
+                    <item row="5" column="1">
+                     <widget class="QLineEdit" name="lineEdit_5"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_12" stretch="1,99">
+                    <item>
+                     <widget class="QLabel" name="label_10">
+                      <property name="text">
+                       <string>Desc.</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPlainTextEdit" name="plainTextEdit_Description"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_7">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QVBoxLayout" name="verticalLayout_11" stretch="0,0,99,1">
+                    <item>
+                     <widget class="QLabel" name="label_11">
+                      <property name="text">
+                       <string>Chapter Image</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_ChapterImagePath">
+                      <property name="text">
+                       <string>---</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_ChapterImage">
+                      <property name="frameShape">
+                       <enum>QFrame::Box</enum>
+                      </property>
+                      <property name="text">
+                       <string>Chapter Image</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="2,3,3">
+                      <item>
+                       <spacer name="horizontalSpacer_2">
+                        <property name="orientation">
+                         <enum>Qt::Horizontal</enum>
+                        </property>
+                        <property name="sizeHint" stdset="0">
+                         <size>
+                          <width>40</width>
+                          <height>20</height>
+                         </size>
+                        </property>
+                       </spacer>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pushButton_SelectChapterImage">
+                        <property name="text">
+                         <string>Chapter 이미지 선택</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pushButton_DeleteChapterImage">
+                        <property name="text">
+                         <string>Chapter 이미지 삭제</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="Line" name="line_8">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0,99,1">
+                  <item>
+                   <widget class="QLabel" name="label_12">
+                    <property name="text">
+                     <string>Cover Image</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_CoverImagePath">
+                    <property name="text">
+                     <string>---</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_CoverImage">
+                    <property name="frameShape">
+                     <enum>QFrame::Box</enum>
+                    </property>
+                    <property name="text">
+                     <string>Cover Image</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="2,3,3">
+                    <item>
+                     <spacer name="horizontalSpacer_3">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_SelectCoverImage">
+                      <property name="text">
+                       <string>Cover 이미지 선택</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_DeleteCoverImage">
+                      <property name="text">
+                       <string>Cover 이미지 삭제</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_1">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <attribute name="title">
+            <string>목차 및 글꼴</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="leftMargin">
+             <number>1</number>
+            </property>
+            <property name="topMargin">
+             <number>2</number>
+            </property>
+            <property name="rightMargin">
+             <number>1</number>
+            </property>
+            <property name="bottomMargin">
+             <number>2</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2010" stretch="1,0,2">
+              <property name="spacing">
+               <number>6</number>
+              </property>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,0,2">
+                <item>
+                 <layout class="QGridLayout" name="gridLayout" columnstretch="1,99">
+                  <item row="1" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx1">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx5"/>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx7"/>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx2">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx6"/>
+                  </item>
+                  <item row="9" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx9">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx2"/>
+                  </item>
+                  <item row="8" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx8"/>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx1"/>
+                  </item>
+                  <item row="9" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx9"/>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx7">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx3">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx4">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx8">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx6">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QCheckBox" name="checkBox_RegEx5">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx3"/>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QComboBox" name="comboBox_RegEx4"/>
+                  </item>
+                  <item row="10" column="1">
+                   <spacer name="verticalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="Line" name="line_5">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,0,1,3,1,3">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1,0,1">
+                    <item>
+                     <widget class="QCheckBox" name="checkBox_FontSync">
+                      <property name="font">
+                       <font>
+                        <family>맑은 고딕</family>
+                        <pointsize>10</pointsize>
+                       </font>
+                      </property>
+                      <property name="text">
+                       <string>제목 글꼴을 본문과 동일하게</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_24">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="checkBox_FontSubset">
+                      <property name="font">
+                       <font>
+                        <family>맑은 고딕</family>
+                        <pointsize>10</pointsize>
+                       </font>
+                      </property>
+                      <property name="toolTip">
+                       <string extracomment="일부 뷰어에서 글꼴표기시에 문제가 발생 할 수 있습니다."/>
+                      </property>
+                      <property name="text">
+                       <string>폰트 용량줄이기</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_28">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,1,4">
+                    <item>
+                     <widget class="QPushButton" name="pushButton_SelectBodyFont">
+                      <property name="text">
+                       <string>본문 글꼴</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="comboBox_SelectBodyFont"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_BodyFontPath">
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_BodyFontExample">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="1,1,4">
+                    <item>
+                     <widget class="QPushButton" name="pushButton_SelectChapterFont">
+                      <property name="text">
+                       <string>제목 글꼴</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="comboBox_SelectChapterFont"/>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_ChapterFontPath">
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_ChapterFontExample">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="Line" name="line_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_201020">
+                <property name="spacing">
+                 <number>2</number>
+                </property>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="10,20,0,12,12,0,20,20,0">
+                    <item>
+                     <widget class="QPushButton" name="pushButton_FindChapterList">
+                      <property name="text">
+                       <string>목차 찾기</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="label_ChapterCount">
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_SelectChapterList">
+                      <property name="text">
+                       <string>목차 가져오기</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_SaveChapterList">
+                      <property name="text">
+                       <string>목차 저장</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_5">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEdit_RegExExample">
+                      <property name="placeholderText">
+                       <string>정규식 예시</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEdit_RegEx">
+                      <property name="placeholderText">
+                       <string>^{1, 3}d</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_AddChapterRegEx">
+                      <property name="text">
+                       <string>정규식 추가</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+                  </item>
+                  <item>
+                   <widget class="QTableView" name="tableView_ChapterList">
+                    <property name="alternatingRowColors">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_ChapterList">
+                    <property name="text">
+                     <string>TextLabel</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>기타</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="leftMargin">
+             <number>1</number>
+            </property>
+            <property name="topMargin">
+             <number>2</number>
+            </property>
+            <property name="rightMargin">
+             <number>1</number>
+            </property>
+            <property name="bottomMargin">
+             <number>2</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2030" stretch="1,0,1,0,99">
+              <property name="topMargin">
+               <number>6</number>
+              </property>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_4" columnstretch="1,1,33,33,33,10,22,0,0,0,0,0">
+                <item row="1" column="10">
+                 <widget class="QLineEdit" name="lineEdit_CharsColor2">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="4">
+                 <widget class="QComboBox" name="comboBox_CharsWeight3"/>
+                </item>
+                <item row="6" column="8">
+                 <widget class="Line" name="line_27">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="8">
+                 <widget class="Line" name="line_26">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <spacer name="horizontalSpacer_6">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="3" column="5">
+                 <widget class="QSpinBox" name="spinBox_CharsWeight4">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="9">
+                 <widget class="QCheckBox" name="checkBox_CharsColor4">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="8">
+                 <widget class="Line" name="line_21">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QLineEdit" name="lineEdit_Chars3"/>
+                </item>
+                <item row="1" column="9">
+                 <widget class="QCheckBox" name="checkBox_CharsColor2">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <widget class="QCheckBox" name="checkBox_Chars6">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="5">
+                 <widget class="QSpinBox" name="spinBox_CharsWeight7">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="6">
+                 <widget class="QComboBox" name="comboBox_CharsStyle4"/>
+                </item>
+                <item row="6" column="2">
+                 <widget class="QLineEdit" name="lineEdit_Chars7"/>
+                </item>
+                <item row="3" column="2">
+                 <widget class="QLineEdit" name="lineEdit_Chars4"/>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="checkBox_Chars1">
+                  <property name="baseSize">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="8">
+                 <widget class="Line" name="line_25">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="5">
+                 <widget class="QSpinBox" name="spinBox_CharsWeight6">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="9">
+                 <widget class="QCheckBox" name="checkBox_CharsColor5">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="7">
+                 <widget class="QCheckBox" name="checkBox_useDivide3">
+                  <property name="text">
+                   <string>구분선 별도</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QComboBox" name="comboBox_CharsAlign3"/>
+                </item>
+                <item row="2" column="5">
+                 <widget class="QSpinBox" name="spinBox_CharsWeight3">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0">
+                 <spacer name="horizontalSpacer_12">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="0" column="9">
+                 <widget class="QCheckBox" name="checkBox_CharsColor1">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="2" column="10">
+                 <widget class="QLineEdit" name="lineEdit_CharsColor3">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0">
+                 <spacer name="horizontalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="4" column="3">
+                 <widget class="QComboBox" name="comboBox_CharsAlign5"/>
+                </item>
+                <item row="4" column="10">
+                 <widget class="QLineEdit" name="lineEdit_CharsColor5">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="4">
+                 <widget class="QComboBox" name="comboBox_CharsWeight1"/>
+                </item>
+                <item row="4" column="4">
+                 <widget class="QComboBox" name="comboBox_CharsWeight5"/>
+                </item>
+                <item row="6" column="7">
+                 <widget class="QCheckBox" name="checkBox_useDivide7">
+                  <property name="text">
+                   <string>구분선 별도</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="8">
+                 <widget class="Line" name="line_23">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="10">
+                 <widget class="QLineEdit" name="lineEdit_CharsColor6">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="5">
+                 <widget class="QSpinBox" name="spinBox_CharsWeight2">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QCheckBox" name="checkBox_Chars3">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <spacer name="horizontalSpacer_10">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="1" column="7">
+                 <widget class="QCheckBox" name="checkBox_useDivide2">
+                  <property name="text">
+                   <string>구분선 별도</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QCheckBox" name="checkBox_Chars4">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="7">
+                 <widget class="QCheckBox" name="checkBox_useDivide1">
+                  <property name="text">
+                   <string>구분선 별도</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="10">
+                 <widget class="QLineEdit" name="lineEdit_CharsColor4">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="6">
+                 <widget class="QComboBox" name="comboBox_CharsStyle3"/>
+                </item>
+                <item row="3" column="7">
+                 <widget class="QCheckBox" name="checkBox_useDivide4">
+                  <property name="text">
+                   <string>구분선 별도</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="7">
+                 <widget class="QCheckBox" name="checkBox_useDivide5">
+                  <property name="text">
+                   <string>구분선 별도</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <spacer name="horizontalSpacer_9">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="1" column="4">
+                 <widget class="QComboBox" name="comboBox_CharsWeight2"/>
+                </item>
+                <item row="0" column="6">
+                 <widget class="QComboBox" name="comboBox_CharsStyle1"/>
+                </item>
+                <item row="6" column="1">
+                 <widget class="QCheckBox" name="checkBox_Chars7">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="9">
+                 <widget class="QCheckBox" name="checkBox_CharsColor6">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="2">
+                 <widget class="QLineEdit" name="lineEdit_Chars5"/>
+                </item>
+                <item row="4" column="5">
+                 <widget class="QSpinBox" name="spinBox_CharsWeight5">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QLineEdit" name="lineEdit_Chars2"/>
+                </item>
+                <item row="6" column="6">
+                 <widget class="QComboBox" name="comboBox_CharsStyle7"/>
+                </item>
+                <item row="6" column="3">
+                 <widget class="QComboBox" name="comboBox_CharsAlign7"/>
+                </item>
+                <item row="0" column="5">
+                 <widget class="QSpinBox" name="spinBox_CharsWeight1">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="7">
+                 <widget class="QCheckBox" name="checkBox_useDivide6">
+                  <property name="text">
+                   <string>구분선 별도</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <spacer name="horizontalSpacer_11">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="5" column="4">
+                 <widget class="QComboBox" name="comboBox_CharsWeight6"/>
+                </item>
+                <item row="5" column="2">
+                 <widget class="QLineEdit" name="lineEdit_Chars6"/>
+                </item>
+                <item row="1" column="8">
+                 <widget class="Line" name="line_22">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QLineEdit" name="lineEdit_Chars1"/>
+                </item>
+                <item row="5" column="6">
+                 <widget class="QComboBox" name="comboBox_CharsStyle6"/>
+                </item>
+                <item row="3" column="4">
+                 <widget class="QComboBox" name="comboBox_CharsWeight4"/>
+                </item>
+                <item row="3" column="3">
+                 <widget class="QComboBox" name="comboBox_CharsAlign4"/>
+                </item>
+                <item row="6" column="9">
+                 <widget class="QCheckBox" name="checkBox_CharsColor7">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="8">
+                 <widget class="Line" name="line_24">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="6">
+                 <widget class="QComboBox" name="comboBox_CharsStyle2"/>
+                </item>
+                <item row="0" column="10">
+                 <widget class="QLineEdit" name="lineEdit_CharsColor1">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="9">
+                 <widget class="QCheckBox" name="checkBox_CharsColor3">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="10">
+                 <widget class="QLineEdit" name="lineEdit_CharsColor7">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <widget class="QComboBox" name="comboBox_CharsAlign1"/>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="checkBox_Chars2">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="6">
+                 <widget class="QComboBox" name="comboBox_CharsStyle5"/>
+                </item>
+                <item row="1" column="3">
+                 <widget class="QComboBox" name="comboBox_CharsAlign2"/>
+                </item>
+                <item row="5" column="3">
+                 <widget class="QComboBox" name="comboBox_CharsAlign6"/>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QCheckBox" name="checkBox_Chars5">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="4">
+                 <widget class="QComboBox" name="comboBox_CharsWeight7"/>
+                </item>
+                <item row="0" column="11">
+                 <widget class="QCheckBox" name="checkBox_br1">
+                  <property name="text">
+                   <string>&lt;BR&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="11">
+                 <widget class="QCheckBox" name="checkBox_br2">
+                  <property name="text">
+                   <string>&lt;BR&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="11">
+                 <widget class="QCheckBox" name="checkBox_br3">
+                  <property name="text">
+                   <string>&lt;BR&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="11">
+                 <widget class="QCheckBox" name="checkBox_br4">
+                  <property name="text">
+                   <string>&lt;BR&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="11">
+                 <widget class="QCheckBox" name="checkBox_br5">
+                  <property name="text">
+                   <string>&lt;BR&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="11">
+                 <widget class="QCheckBox" name="checkBox_br6">
+                  <property name="text">
+                   <string>&lt;BR&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="11">
+                 <widget class="QCheckBox" name="checkBox_br7">
+                  <property name="text">
+                   <string>&lt;BR&gt;</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="Line" name="line">
+                <property name="frameShadow">
+                 <enum>QFrame::Sunken</enum>
+                </property>
+                <property name="lineWidth">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout_6" columnstretch="1,1,33,33,33,10,22,0,0,20">
+                <item row="3" column="9">
+                 <widget class="QLineEdit" name="lineEdit_BracketsColor4">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="3">
+                 <widget class="QComboBox" name="comboBox_BracketsAlign3"/>
+                </item>
+                <item row="2" column="8">
+                 <widget class="QCheckBox" name="checkBox_BracketsColor3">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="5">
+                 <widget class="QSpinBox" name="spinBox_BracketsWeight4">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="8">
+                 <widget class="QCheckBox" name="checkBox_BracketsColor5">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="2">
+                 <widget class="QComboBox" name="comboBox_Brackets6"/>
+                </item>
+                <item row="0" column="6">
+                 <widget class="QComboBox" name="comboBox_BracketsStyle1"/>
+                </item>
+                <item row="1" column="3">
+                 <widget class="QComboBox" name="comboBox_BracketsAlign2"/>
+                </item>
+                <item row="5" column="9">
+                 <widget class="QLineEdit" name="lineEdit_BracketsColor6">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="3">
+                 <widget class="QComboBox" name="comboBox_BracketsAlign5"/>
+                </item>
+                <item row="6" column="4">
+                 <widget class="QComboBox" name="comboBox_BracketsWeight7"/>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="checkBox_Brackets1">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="3">
+                 <widget class="QComboBox" name="comboBox_BracketsAlign4"/>
+                </item>
+                <item row="5" column="8">
+                 <widget class="QCheckBox" name="checkBox_BracketsColor6">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QCheckBox" name="checkBox_Brackets5">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="2">
+                 <widget class="QComboBox" name="comboBox_Brackets2"/>
+                </item>
+                <item row="3" column="2">
+                 <widget class="QComboBox" name="comboBox_Brackets4"/>
+                </item>
+                <item row="2" column="9">
+                 <widget class="QLineEdit" name="lineEdit_BracketsColor3">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="5">
+                 <widget class="QSpinBox" name="spinBox_BracketsWeight5">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="6">
+                 <widget class="QComboBox" name="comboBox_BracketsStyle3"/>
+                </item>
+                <item row="0" column="9">
+                 <widget class="QLineEdit" name="lineEdit_BracketsColor1">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="7">
+                 <widget class="Line" name="line_13">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <spacer name="horizontalSpacer_14">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="6" column="2">
+                 <widget class="QComboBox" name="comboBox_Brackets7"/>
+                </item>
+                <item row="5" column="0">
+                 <spacer name="horizontalSpacer_18">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="6" column="6">
+                 <widget class="QComboBox" name="comboBox_BracketsStyle7"/>
+                </item>
+                <item row="6" column="9">
+                 <widget class="QLineEdit" name="lineEdit_BracketsColor7">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="4">
+                 <widget class="QComboBox" name="comboBox_BracketsWeight6"/>
+                </item>
+                <item row="3" column="8">
+                 <widget class="QCheckBox" name="checkBox_BracketsColor4">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="4">
+                 <widget class="QComboBox" name="comboBox_BracketsWeight4"/>
+                </item>
+                <item row="0" column="7">
+                 <widget class="Line" name="line_9">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="5">
+                 <widget class="QSpinBox" name="spinBox_BracketsWeight6">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QComboBox" name="comboBox_Brackets3"/>
+                </item>
+                <item row="2" column="7">
+                 <widget class="Line" name="line_11">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="3">
+                 <widget class="QComboBox" name="comboBox_BracketsAlign6"/>
+                </item>
+                <item row="1" column="4">
+                 <widget class="QComboBox" name="comboBox_BracketsWeight2"/>
+                </item>
+                <item row="4" column="6">
+                 <widget class="QComboBox" name="comboBox_BracketsStyle5"/>
+                </item>
+                <item row="4" column="9">
+                 <widget class="QLineEdit" name="lineEdit_BracketsColor5">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="7">
+                 <widget class="Line" name="line_14">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="4">
+                 <widget class="QComboBox" name="comboBox_BracketsWeight1"/>
+                </item>
+                <item row="6" column="1">
+                 <widget class="QCheckBox" name="checkBox_Brackets7">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1">
+                 <widget class="QCheckBox" name="checkBox_Brackets6">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="4">
+                 <widget class="QComboBox" name="comboBox_BracketsWeight3"/>
+                </item>
+                <item row="4" column="4">
+                 <widget class="QComboBox" name="comboBox_BracketsWeight5"/>
+                </item>
+                <item row="3" column="7">
+                 <widget class="Line" name="line_12">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <spacer name="horizontalSpacer_17">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="4" column="2">
+                 <widget class="QComboBox" name="comboBox_Brackets5"/>
+                </item>
+                <item row="2" column="0">
+                 <spacer name="horizontalSpacer_15">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="6" column="8">
+                 <widget class="QCheckBox" name="checkBox_BracketsColor7">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="5">
+                 <widget class="QSpinBox" name="sspinBox_BracketsWeight3">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="6">
+                 <widget class="QComboBox" name="comboBox_BracketsStyle6"/>
+                </item>
+                <item row="6" column="7">
+                 <widget class="Line" name="line_15">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <widget class="QComboBox" name="comboBox_BracketsAlign1"/>
+                </item>
+                <item row="1" column="7">
+                 <widget class="Line" name="line_10">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QComboBox" name="comboBox_Brackets1"/>
+                </item>
+                <item row="0" column="5">
+                 <widget class="QSpinBox" name="spinBox_BracketsWeight1">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="5">
+                 <widget class="QSpinBox" name="spinBox_BracketsWeight2">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <spacer name="horizontalSpacer_16">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="6" column="3">
+                 <widget class="QComboBox" name="comboBox_BracketsAlign7"/>
+                </item>
+                <item row="0" column="8">
+                 <widget class="QCheckBox" name="checkBox_BracketsColor1">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QCheckBox" name="checkBox_Brackets3">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <spacer name="horizontalSpacer_13">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="6" column="0">
+                 <spacer name="horizontalSpacer_19">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="6" column="5">
+                 <widget class="QSpinBox" name="spinBox_BracketsWeight7">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="minimum">
+                   <number>100</number>
+                  </property>
+                  <property name="maximum">
+                   <number>900</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="checkBox_Brackets2">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="8">
+                 <widget class="QCheckBox" name="checkBox_BracketsColor2">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="6">
+                 <widget class="QComboBox" name="comboBox_BracketsStyle4"/>
+                </item>
+                <item row="1" column="9">
+                 <widget class="QLineEdit" name="lineEdit_BracketsColor2">
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QCheckBox" name="checkBox_Brackets4">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="6">
+                 <widget class="QComboBox" name="comboBox_BracketsStyle2"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="Line" name="line_2">
+                <property name="frameShadow">
+                 <enum>QFrame::Sunken</enum>
+                </property>
+                <property name="lineWidth">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,0,20">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="1,10,10,1,5,5,5,1,1,0,20,1,1,5">
+                  <item>
+                   <widget class="QCheckBox" name="checkBox_ChapterStyle">
+                    <property name="text">
+                     <string>Chapter 형식 지정</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="comboBox_ChapterSize"/>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="comboBox_ChapterAlign"/>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_16">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label">
+                    <property name="text">
+                     <string>간격(br/em)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="spinBox_Top">
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="value">
+                     <number>1</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="spinBox_Bottom">
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="value">
+                     <number>4</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_17">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="checkBox_ChapterShadow">
+                    <property name="text">
+                     <string>그림자 효과</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_18">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_20">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="Line" name="line_19">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="checkBox_ePubDivide">
+                    <property name="text">
+                     <string>Chapter별 분할</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="spinBox_ChapterCnt">
+                    <property name="alignment">
+                     <set>Qt::AlignCenter</set>
+                    </property>
+                    <property name="value">
+                     <number>30</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="Line" name="line_20">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_18">
+                  <property name="text">
+                   <string>TextLabel</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_4">
+           <attribute name="title">
+            <string>환경설정</string>
+           </attribute>
+           <widget class="QWidget" name="horizontalLayoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>16</x>
+              <y>72</y>
+              <width>385</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="0,3,1,0">
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>테마</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_selectTheme"/>
+             </item>
+             <item>
+              <widget class="QPushButton" name="theme_edit_button">
+               <property name="text">
+                <string>편집</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_23">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="horizontalLayoutWidget_2">
+            <property name="geometry">
+             <rect>
+              <x>16</x>
+              <y>22</y>
+              <width>481</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="2,1,2">
+             <item>
+              <widget class="QPushButton" name="pushButton_exportSetting">
+               <property name="text">
+                <string>환경설정 내보내기</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_21">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_importSetting">
+               <property name="text">
+                <string>환경설정 불러오기</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="horizontalLayoutWidget_3">
+            <property name="geometry">
+             <rect>
+              <x>16</x>
+              <y>122</y>
+              <width>261</width>
+              <height>41</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="2,0">
+             <item>
+              <widget class="QPushButton" name="pushButton_setFontFolder">
+               <property name="text">
+                <string>글꼴 폴더 지정</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_22">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_30">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3010">
+          <item>
+           <widget class="QLabel" name="label_ePubGenerate">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_ePubGenerate">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>맑은 고딕</family>
+              <pointsize>14</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>ePub 제작</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="10,1,3">
+          <item>
+           <widget class="QLabel" name="labelInfo">
+            <property name="text">
+             <string>---</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="progressBar">
+            <property name="value">
+             <number>24</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1029</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="sizeGripEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

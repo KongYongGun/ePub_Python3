@@ -1,0 +1,39 @@
+# 250822.ui 컨트롤 목록 (name 기준)
+# 자동 생성 파일 - PyQt Designer에서 정의된 위젯/컨트롤 이름 정리
+
+# 주요 컨테이너
+- QMainWindow: MainWindow
+- QWidget: centralwidget
+- QTabWidget: tabWidget
+
+# 탭별 주요 컨트롤
+
+## [탭1] 목차 및 글꼴
+- QCheckBox: checkBox_RegEx1 ~ checkBox_RegEx9
+- QComboBox: comboBox_RegEx1 ~ comboBox_RegEx9
+- QPushButton: pushButton_SelectBodyFont, pushButton_SelectChapterFont, pushButton_FindChapterList, pushButton_SelectChapterList, pushButton_SaveChapterList, pushButton_AddChapterRegEx
+- QLineEdit: lineEdit_RegExExample, lineEdit_RegEx
+- QTableView: tableView_ChapterList
+- QLabel: label_ChapterList, label_BodyFontExample, label_ChapterFontExample 등
+
+## [탭2] 메타데이터
+- QLineEdit: lineEdit_Title, lineEdit_Author, lineEdit_ISBN, lineEdit_4, lineEdit_5
+- QPlainTextEdit: plainTextEdit_Description
+- QLabel: label_ChapterImage, label_CoverImage, label_ChapterImagePath, label_CoverImagePath 등
+- QPushButton: pushButton_SelectChapterImage, pushButton_DeleteChapterImage, pushButton_SelectCoverImage, pushButton_DeleteCoverImage
+
+## [탭3] 기타
+- QLineEdit, QComboBox, QSpinBox, QCheckBox 등 (Chars, Brackets 관련 이름 다수)
+
+## [탭4] 환경설정
+- QComboBox: comboBox_selectTheme
+- QPushButton: theme_edit_button, pushButton_exportSetting
+- QLabel: label_2
+
+# 기타
+- QPushButton: pushButton_SelectTextFile
+- QLabel: label_TextFilePath
+- QLineEdit, QComboBox, QCheckBox, QSpinBox, QLabel, QTableView, QPlainTextEdit, QTabWidget, QLayout, Line(구분선) 등 다수
+
+# 전체 컨트롤(이름 기준, 중복 제외)
+# (필요시 각 컨트롤별 전체 목록을 세부적으로 추가 가능)
