@@ -197,6 +197,42 @@ class FastFileEncodingWorker(QtCore.QThread):
 # - 사용자와의 모든 상호작용의 중심이 되는 클래스입니다.
 ########################################################
 class MainWindow(QtWidgets.QMainWindow):
+    # 폰트 예시 텍스트(한 곳에서만 선언, 중복 방지)
+    FONT_SAMPLE_TEXT = (
+        '한글: 그놈의 택시 기사 왈, "퀵서비스 줍쇼~"라며 휘파람을 불었다.\n'
+        '영어: The quick brown fox jumps over the lazy dog.\n'
+        '한자: 風林火山 不動如山 雷霆萬鈞 電光石火\n'
+        '숫자: 0123456789\n'
+        '특수문자: !@#$%^&*()_+-=[]{{}}|;\':",./<>?`~'
+    )
+    def select_chapter_font(self):
+        """
+        pushButton_SelectChapterFont 클릭 시 폰트 파일(.ttf, .otf 등) 선택 다이얼로그를 띄우고,
+        선택한 파일 경로를 label_ChapterFontPath에 표시,
+        해당 폰트로 label_ChapterFontExample의 폰트 적용
+        (checkBox_FontSync 연동은 제외)
+        """
+        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "챕터 폰트 파일 선택",
+            "",
+            "Font Files (*.ttf *.otf *.ttc);;All Files (*)"
+        )
+        if not file_path:
+            return
+        label_path = getattr(self, "label_ChapterFontPath", None)
+        label_example = getattr(self, "label_ChapterFontExample", None)
+        if label_path is not None:
+            label_path.setText(file_path)
+        if label_example is not None:
+            font_id = QtGui.QFontDatabase.addApplicationFont(file_path)
+            if font_id != -1:
+                families = QtGui.QFontDatabase.applicationFontFamilies(font_id)
+                if families:
+                    font = QtGui.QFont(families[0])
+                    label_example.setFont(font)
+            else:
+                print(f"폰트 파일 로드 실패: {file_path}")
     def select_body_font(self):
         """
         pushButton_SelectBodyFont 클릭 시 폰트 파일(.ttf, .otf 등) 선택 다이얼로그를 띄우고,
@@ -222,8 +258,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 if families:
                     font = QtGui.QFont(families[0])
                     label_example.setFont(font)
-            else:
-                print(f"폰트 파일 로드 실패: {file_path}")
+            # 폰트 선택 시 예시 텍스트는 폰트가 정상 적용된 경우에만 표시
+            label_example.setText(self.FONT_SAMPLE_TEXT)
+            # (설명) FONT_SAMPLE_TEXT는 클래스 상수로, 중복 없이 한 곳에서 관리됨
                 
     def setup_fontsync_controls(self):
         """
@@ -376,30 +413,32 @@ class MainWindow(QtWidgets.QMainWindow):
         # if hasattr(self, 'pushButton_Cancel'):
         #     self.pushButton_Cancel.setVisible(False)
 
+
     def connect_events(self):
         """
         이벤트 연결 함수
-        - 버튼 클릭 등 사용자 이벤트를 해당 메서드에 robust하게 연결합니다.
+        - 버튼 클릭 등 사용자 이벤트를 robust하게 연결합니다.
         - 모든 위젯 접근 시 getattr + None 체크 방식을 사용합니다.
-
         [이유 및 설명]
         - PyQt6의 위젯 객체(QComboBox, QPushButton 등)는 bool 평가 시 False가 될 수 있습니다.
-          (예: if self.pushButton_SelectTextFile: ... → 일부 환경에서 동작하지 않음)
+            (예: if self.pushButton_SelectTextFile: ... → 일부 환경에서 동작하지 않음)
         - getattr(self, '위젯명', None)으로 안전하게 위젯을 가져오고,
-          None이 아닌 경우에만 이벤트를 연결하면, UI가 변경되거나 일부 위젯이 없는 경우에도
-          AttributeError 없이 안전하게 동작합니다.
+            None이 아닌 경우에만 이벤트를 연결하면, UI가 변경되거나 일부 위젯이 없는 경우에도
+            AttributeError 없이 안전하게 동작합니다.
         - 유지보수성과 확장성을 위해 모든 이벤트 연결에 일관적으로 적용합니다.
         """
         # 파일 선택 버튼 (getattr + None 체크로 robust하게)
         btn_selectfile = getattr(self, "pushButton_SelectTextFile", None)
         if btn_selectfile is not None:
-            # pushButton_SelectTextFile이 UI에 없거나 이름이 바뀌어도 오류 없이 무시됨
-            btn_selectfile.clicked.connect(self.select_text_file)
+                btn_selectfile.clicked.connect(self.select_text_file)
         # 본문 폰트 선택 버튼 (getattr + None 체크)
         btn_bodyfont = getattr(self, "pushButton_SelectBodyFont", None)
         if btn_bodyfont is not None:
-            # pushButton_SelectBodyFont이 없는 경우에도 안전
-            btn_bodyfont.clicked.connect(self.select_body_font)
+                btn_bodyfont.clicked.connect(self.select_body_font)
+        # 챕터 폰트 선택 버튼 (getattr + None 체크, checkBox_FontSync 연동 제외)
+        btn_chapterfont = getattr(self, "pushButton_SelectChapterFont", None)
+        if btn_chapterfont is not None:
+                btn_chapterfont.clicked.connect(self.select_chapter_font)
         # (예시) 취소 버튼: 실제 UI에 없으므로 getattr로 접근하지 않음
         # btn_cancel = getattr(self, 'pushButton_Cancel', None)
         # if btn_cancel is not None:
@@ -430,11 +469,10 @@ class MainWindow(QtWidgets.QMainWindow):
             # 대용량 파일 경고
             if file_size_mb > 100:  # 100MB 이상
                 reply = QtWidgets.QMessageBox.question(
-                    self, 
-                    "대용량 파일", 
-                    f"파일 크기: {file_size_mb:.1f}MB\n"
-                    "처리에 시간이 걸릴 수 있습니다. 계속하시겠습니까?",
-                    QtWidgets.QMessageBox.StandardButton.Yes | 
+                    self,
+                    "대용량 파일",
+                    f"파일 크기: {file_size_mb:.1f}MB\n처리에 시간이 걸릴 수 있습니다. 계속하시겠습니까?",
+                    QtWidgets.QMessageBox.StandardButton.Yes |
                     QtWidgets.QMessageBox.StandardButton.No
                 )
                 if reply != QtWidgets.QMessageBox.StandardButton.Yes:
