@@ -9,12 +9,12 @@
 # 탭별 주요 컨트롤
 
 ## [탭1] 목차 및 글꼴
-- QCheckBox: checkBox_RegEx1 ~ checkBox_RegEx9
-- QComboBox: comboBox_RegEx1 ~ comboBox_RegEx9
+- QCheckBox: checkBox_RegEx1 ~ checkBox_RegEx9, checkBox_FontSync, checkBox_FontSubset
+- QComboBox: comboBox_RegEx1 ~ comboBox_RegEx9, comboBox_SelectBodyFont, comboBox_SelectChapterFont
 - QPushButton: pushButton_SelectBodyFont, pushButton_SelectChapterFont, pushButton_FindChapterList, pushButton_SelectChapterList, pushButton_SaveChapterList, pushButton_AddChapterRegEx
 - QLineEdit: lineEdit_RegExExample, lineEdit_RegEx
 - QTableView: tableView_ChapterList
-- QLabel: label_ChapterList, label_BodyFontExample, label_ChapterFontExample 등
+- QLabel: label_ChapterList, label_BodyFontExample, label_ChapterFontExample, label_BodyFontPath, label_ChapterFontPath, label_ChapterCount 등
 
 ## [탭2] 메타데이터
 - QLineEdit: lineEdit_Title, lineEdit_Author, lineEdit_ISBN, lineEdit_4, lineEdit_5
@@ -23,17 +23,45 @@
 - QPushButton: pushButton_SelectChapterImage, pushButton_DeleteChapterImage, pushButton_SelectCoverImage, pushButton_DeleteCoverImage
 
 ## [탭3] 기타
-- QLineEdit, QComboBox, QSpinBox, QCheckBox 등 (Chars, Brackets 관련 이름 다수)
+### 문자 스타일 관련 (Chars)
+- QCheckBox: checkBox_Chars1 ~ checkBox_Chars7, checkBox_CharsColor1 ~ checkBox_CharsColor7, checkBox_useDivide1 ~ checkBox_useDivide7, checkBox_br1 ~ checkBox_br7
+- QLineEdit: lineEdit_Chars1 ~ lineEdit_Chars7, lineEdit_CharsColor1 ~ lineEdit_CharsColor7
+- QComboBox: comboBox_CharsAlign1 ~ comboBox_CharsAlign7, comboBox_CharsWeight1 ~ comboBox_CharsWeight7, comboBox_CharsStyle1 ~ comboBox_CharsStyle7
+- QSpinBox: spinBox_CharsWeight1 ~ spinBox_CharsWeight7
+
+### 괄호 스타일 관련 (Brackets) - 새로 추가됨
+- QCheckBox: checkBox_Brackets1 ~ checkBox_Brackets7, checkBox_BracketsColor1 ~ checkBox_BracketsColor7
+- QComboBox: comboBox_Brackets1 ~ comboBox_Brackets7, comboBox_BracketsAlign1 ~ comboBox_BracketsAlign7, comboBox_BracketsWeight1 ~ comboBox_BracketsWeight7, comboBox_BracketsStyle1 ~ comboBox_BracketsStyle7
+- QSpinBox: spinBox_BracketsWeight1 ~ spinBox_BracketsWeight7, sspinBox_BracketsWeight3
+- QLineEdit: lineEdit_BracketsColor1 ~ lineEdit_BracketsColor7
+
+### Chapter 스타일 관련
+- QCheckBox: checkBox_ChapterStyle, checkBox_ChapterShadow, checkBox_ePubDivide
+- QComboBox: comboBox_ChapterSize, comboBox_ChapterAlign
+- QSpinBox: spinBox_Top, spinBox_Bottom, spinBox_ChapterCnt
 
 ## [탭4] 환경설정
 - QComboBox: comboBox_selectTheme
-- QPushButton: theme_edit_button, pushButton_exportSetting
+- QPushButton: theme_edit_button, pushButton_exportSetting, pushButton_importSetting, pushButton_setFontFolder
 - QLabel: label_2
 
 # 기타
-- QPushButton: pushButton_SelectTextFile
-- QLabel: label_TextFilePath
-- QLineEdit, QComboBox, QCheckBox, QSpinBox, QLabel, QTableView, QPlainTextEdit, QTabWidget, QLayout, Line(구분선) 등 다수
+- QPushButton: pushButton_SelectTextFile, pushButton_ePubGenerate
+- QLabel: label_TextFilePath, label_ePubGenerate, labelInfo, label_18
+- QProgressBar: progressBar
+- QMenuBar: menubar
+- QStatusBar: statusbar
 
-# 전체 컨트롤(이름 기준, 중복 제외)
-# (필요시 각 컨트롤별 전체 목록을 세부적으로 추가 가능)
+# 주요 추가 컨트롤
+- Line 위젯들: line, line_2 ~ line_28 (구분선)
+- Spacer들: horizontalSpacer, horizontalSpacer_2 ~ horizontalSpacer_24, verticalSpacer
+
+# 전체 컨트롤 개수
+- QCheckBox: 약 70개 이상 (RegEx, Chars, Brackets, Font, Color, BR 등)
+- QComboBox: 약 50개 이상 (RegEx, Chars, Brackets 스타일 관련)
+- QSpinBox: 약 20개 이상 (Weight, 간격 설정 등)
+- QLineEdit: 약 25개 이상 (텍스트 입력, 색상 값 등)
+- QPushButton: 약 15개 (파일 선택, 이미지 선택/삭제, 설정 등)
+- QLabel: 약 30개 이상 (경로, 예시, 설명 텍스트 등)
+- Line: 약 30개 (구분선)
+- Spacer: 약 25개 (레이아웃 간격)
