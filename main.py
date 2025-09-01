@@ -197,14 +197,122 @@ class FastFileEncodingWorker(QtCore.QThread):
 # - 사용자와의 모든 상호작용의 중심이 되는 클래스입니다.
 ########################################################
 class MainWindow(QtWidgets.QMainWindow):
+    def set_cover_image(self, image: QtGui.QImage, name: str = "클립보드"):
+        # 원본 이미지와 이름을 저장
+        self._cover_image = image.copy() if image is not None else None
+        self._cover_image_name = name
+        self._update_cover_image_pixmap()
+
+    def _update_cover_image_pixmap(self):
+        label = getattr(self, "label_CoverImage", None)
+        label_path = getattr(self, "label_CoverImagePath", None)
+        image = getattr(self, "_cover_image", None)
+        name = getattr(self, "_cover_image_name", "")
+        if label is not None:
+            # 폼이 이미지 크기에 맞춰 커지는 현상 완전 방지 (sizePolicy 강제 적용)
+            label.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Ignored)
+            label.setScaledContents(False)
+            label.setMinimumSize(0, 0)
+            label.setMaximumSize(16777215, 16777215)
+        if label is not None and image is not None and not image.isNull():
+            label_w, label_h = label.width(), label.height()
+            img_w, img_h = image.width(), image.height()
+            # contain 방식: 세로 기준 맞춤, 가로는 비율에 따라 여백이 생김
+            pixmap = QtGui.QPixmap.fromImage(image).scaled(label_w, label_h, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
+            label.setPixmap(pixmap)
+            if label_path is not None:
+                label_path.setText(f"{name}[{img_w}x{img_h}]")
+        elif label is not None:
+            label.clear()
+            if label_path is not None:
+                label_path.clear()
+    
+    def set_chapter_image(self, image: QtGui.QImage, name: str = "클립보드"):
+        # 원본 이미지와 이름을 저장
+        self._chapter_image = image.copy() if image is not None else None
+        self._chapter_image_name = name
+        self._update_chapter_image_pixmap()
+    
+    def _update_chapter_image_pixmap(self):
+        label = getattr(self, "label_ChapterImage", None)
+        label_path = getattr(self, "label_ChapterImagePath", None)
+        image = getattr(self, "_chapter_image", None)
+        name = getattr(self, "_chapter_image_name", "")
+        if label is not None:
+            # 폼이 이미지 크기에 맞춰 커지는 현상 완전 방지 (sizePolicy 강제 적용)
+            label.setSizePolicy(QtWidgets.QSizePolicy.Policy.Ignored, QtWidgets.QSizePolicy.Policy.Ignored)
+            label.setScaledContents(False)
+            label.setMinimumSize(0, 0)
+            label.setMaximumSize(16777215, 16777215)
+        if label is not None and image is not None and not image.isNull():
+            label_w, label_h = label.width(), label.height()
+            img_w, img_h = image.width(), image.height()
+            # contain 방식: 세로 기준 맞춤, 가로는 비율에 따라 여백이 생김
+            pixmap = QtGui.QPixmap.fromImage(image).scaled(label_w, label_h, QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
+            label.setPixmap(pixmap)
+            if label_path is not None:
+                label_path.setText(f"{name}[{img_w}x{img_h}]")
+        elif label is not None:
+            label.clear()
+            if label_path is not None:
+                label_path.clear()    
+    
+    def resizeEvent(self, event):
+        self._update_chapter_image_pixmap()
+        self._update_cover_image_pixmap()
+        super().resizeEvent(event)
+        
+    def eventFilter(self, obj, event):
+        # label_CoverImage 관련 이벤트 처리
+        if obj.objectName() == "label_CoverImage":
+            # 더블클릭: 구글 이미지 검색
+            if event.type() == QtCore.QEvent.Type.MouseButtonDblClick:
+                lineedit = getattr(self, "lineEdit_Title", None)
+                if lineedit is not None:
+                    title = lineedit.text().strip()
+                    if title:
+                        import webbrowser
+                        url = f"https://www.google.com/search?tbm=isch&q={title}"
+                        webbrowser.open(url)
+                return True
+            # 우클릭: 컨텍스트 메뉴
+            elif event.type() == QtCore.QEvent.Type.ContextMenu:
+                menu = QtWidgets.QMenu(obj)
+                paste_action = menu.addAction("붙여넣기")
+                action = menu.exec(event.globalPos())
+                if action == paste_action:
+                    clipboard = QtWidgets.QApplication.clipboard()
+                    mime = clipboard.mimeData()
+                    if mime.hasImage():
+                        image = clipboard.image()
+                        self.set_cover_image(image, name="클립보드")
+                return True
+            # Ctrl+V 붙여넣기 (KeyPress)
+            elif event.type() == QtCore.QEvent.Type.KeyPress:
+                if event.key() == QtCore.Qt.Key.Key_V and event.modifiers() & QtCore.Qt.KeyboardModifier.ControlModifier:
+                    clipboard = QtWidgets.QApplication.clipboard()
+                    mime = clipboard.mimeData()
+                    if mime.hasImage():
+                        image = clipboard.image()
+                        self.set_cover_image(image, name="클립보드")
+                        return True
+            # Ctrl+V 붙여넣기 (ShortcutOverride: 일부 환경에서 필요)
+            elif event.type() == QtCore.QEvent.Type.ShortcutOverride:
+                if event.key() == QtCore.Qt.Key.Key_V and event.modifiers() & QtCore.Qt.KeyboardModifier.ControlModifier:
+                    event.accept()
+                    return True
+        return super().eventFilter(obj, event)
     # 폰트 예시 텍스트(한 곳에서만 선언, 중복 방지)
     FONT_SAMPLE_TEXT = (
         '한글: 그놈의 택시 기사 왈, "퀵서비스 줍쇼~"라며 휘파람을 불었다.\n'
         '영어: The quick brown fox jumps over the lazy dog.\n'
         '한자: 風林火山 不動如山 雷霆萬鈞 電光石火\n'
         '숫자: 0123456789\n'
-        '특수문자: !@#$%^&*()_+-=[]{{}}|;\':",./<>?`~'
+        '특수문자: !@#$%^&*()_+-=[]{}|;\':",./<>?`~\n'
+        '유니코드: ✦✧✶✷✸✹✵⋆⟊⊹✺✾✿❀◆◇♢◈❖❂⫷⫸⟪⟫⊱⊰⋅\n'
+        '       ✠☩✟☨☙⚚⚜☯─━═⎯〰≈¤ᚠᚢᚦᚨᚱᚲᚷᚹᚾᛁᛃᛗᛟᛉ𐌔𐌍𐍈⚔⚔︎𓂀𓆃'
     )
+  
     def select_chapter_font(self):
         """
         pushButton_SelectChapterFont 클릭 시 폰트 파일(.ttf, .otf 등) 선택 다이얼로그를 띄우고,
@@ -231,8 +339,11 @@ class MainWindow(QtWidgets.QMainWindow):
                 if families:
                     font = QtGui.QFont(families[0])
                     label_example.setFont(font)
+                    label_example.setStyleSheet("font-size: 16pt;")
+                label_example.setText(self.FONT_SAMPLE_TEXT)        
             else:
                 print(f"폰트 파일 로드 실패: {file_path}")
+  
     def select_body_font(self):
         """
         pushButton_SelectBodyFont 클릭 시 폰트 파일(.ttf, .otf 등) 선택 다이얼로그를 띄우고,
@@ -258,10 +369,15 @@ class MainWindow(QtWidgets.QMainWindow):
                 if families:
                     font = QtGui.QFont(families[0])
                     label_example.setFont(font)
-            # 폰트 선택 시 예시 텍스트는 폰트가 정상 적용된 경우에만 표시
-            label_example.setText(self.FONT_SAMPLE_TEXT)
+                    # label_emample의 폰트 크기 지정
+                    label_example.setStyleSheet("font-size: 16pt;")
+                    
+                # 폰트 선택 시 예시 텍스트는 폰트가 정상 적용된 경우에만 표시
+                label_example.setText(self.FONT_SAMPLE_TEXT)
             # (설명) FONT_SAMPLE_TEXT는 클래스 상수로, 중복 없이 한 곳에서 관리됨
-                
+            else:
+               print(f"폰트 파일 로드 실패: {file_path}")   
+               
     def setup_fontsync_controls(self):
         """
         checkBox_FontSync 체크 상태에 따라 pushButton_SelectChapterFont, comboBox_SelectChapterFont,
@@ -313,7 +429,7 @@ class MainWindow(QtWidgets.QMainWindow):
         1. DB 연결이 되어 있는지 확인합니다.
         2. ChapterRegex 테이블에서 is_enabled=1인 행만 name, example, pattern을 모두 읽어옵니다.
         3. 콤보박스에 표시되는 텍스트는 "이름 (예시)" 형태로 만듭니다.
-        4. 콤보박스의 실제 값(data, userData)은 pattern(정규식 패턴)으로 저장합니다.
+        4. 콤보박스의 실제 값(data, userData)은 pattern(정규식 패턴)으로 저장됩니다.
         5. comboBox_RegEx1 ~ comboBox_RegEx9 각각에 대해:
            - 콤보박스가 실제로 존재하면 기존 항목을 모두 지우고,
            - DB에서 읽어온 정규식 목록을 추가합니다.
@@ -374,6 +490,137 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             print(f"콤보박스 데이터 로드 오류: {e}")
     
+    def setComboboxAlign(self):
+        """
+        [setComboboxAlign 함수 - AlignStyle 테이블 기반]
+        - 이 함수는 setting.db의 AlignStyle 테이블에서 목록을 읽어와
+         comboBox_CharsAlign1 ~ comboBox_CharsAlign7, comboBox_BracketsAlign1 ~ comboBox_BracketsAlign7
+         콤보박스에 데이터를 자동으로 채웁니다.
+
+        [동작 원리]
+        1. DB 연결이 되어 있는지 확인합니다.
+        2. ChapterAlignStyleRegex 테이블에서 name, description을 모두 읽어옵니다.
+        3. 콤보박스에 표시되는 텍스트는 "이름" 형태로 만듭니다.
+        4. 콤보박스의 실제 값(data, userData)은 description을으로 저장됩니다.
+        5. comboBox_CharsAlign1 ~ comboBox_CharsAlign7, comboBox_BracketsAlign1 ~ comboBox_BracketsAlign7 각각에 대해:
+           - 콤보박스가 실제로 존재하면 기존 항목을 모두 지우고,
+           - DB에서 읽어온 목록을 추가합니다.
+
+        [예시]
+        - 화면 표시: name
+        - 실제 값: description
+
+        [주의]
+        - DB 연결(db_conn)은 전역 변수로 가정합니다.
+        - 콤보박스 이름, 테이블/컬럼명은 실제 환경에 맞게 수정해야 합니다.
+        """
+        if not db_conn:
+            print("DB 연결이 필요합니다.")
+            return
+        try:
+            cursor = db_conn.cursor()
+            # AlignStyle 테이블에서 name, description 조회
+            cursor.execute("SELECT name, description FROM AlignStyle ORDER BY id ASC")
+            rows = cursor.fetchall()
+            # 콤보박스에 넣을 label, value 리스트 생성
+            label_list = []  # 콤보박스에 표시될 텍스트
+            value_list = []  # 실제 값(description)
+            for name, description in rows:
+                label_list.append(name)
+                value_list.append(description)
+            # comboBox_CharsAlign1 ~ comboBox_CharsAlign7, comboBox_BracketsAlign1 ~ comboBox_BracketsAlign7에 데이터 채우기
+            for prefix in ["comboBox_CharsAlign", "comboBox_BracketsAlign"]:
+                for i in range(1, 8):
+                    combo_name = f"{prefix}{i}"
+                    combo = getattr(self, combo_name, None)
+                    print(f"{combo_name=}, {combo=}")
+                    if combo is not None:
+                        print(f"{combo_name} 진입")
+                        combo.clear()  # 기존 항목 모두 삭제
+                        # label_list와 value_list를 함께 추가
+                        for label, value in zip(label_list, value_list):
+                            combo.addItem(label, value)
+                        # 펼쳐지는 목록의 최대 표시 항목 수(height) 조절
+                        combo.setMaxVisibleItems(15)
+                        # 펼쳐지는 목록의 width를 내용에 맞게 자동 확장
+                        try:
+                            min_width = max(combo.width(), combo.view().sizeHintForColumn(0) + 30)
+                            combo.view().setMinimumWidth(min_width)
+                        except Exception as e:
+                            print(f"{combo_name} width 조절 오류: {e}")
+        except Exception as e:
+            print(f"콤보박스 데이터 로드 오류: {e}")
+     
+    def setComboboxWeight(self):
+        """
+        [setComboboxWeight 함수 - FontStyle 테이블 기반]
+        - 이 함수는 setting.db의 FontStyle 테이블에서 목록을 읽어와
+         comboBox_CharsWeight1 ~ comboBox_CharsWeight7, comboBox_BracketsWeight1 ~ comboBox_BracketsWeight7
+         콤보박스에 데이터를 자동으로 채웁니다.
+
+        [동작 원리]
+        1. DB 연결이 되어 있는지 확인합니다.
+        2. FontStyle 테이블에서 name, description을 모두 읽어옵니다.
+        3. 콤보박스에 표시되는 텍스트는 "이름" 형태로 만듭니다.
+        4. 콤보박스의 실제 값(data, userData)은 description을으로 저장됩니다.
+        5. comboBox_CharsWeight1 ~ comboBox_CharsWeight7, comboBox_BracketsWeight1 ~ comboBox_BracketsWeight7 각각에 대해:
+           - 콤보박스가 실제로 존재하면 기존 항목을 모두 지우고,
+           - DB에서 읽어온 목록을 추가합니다.
+        6. 기본값은 Normal 이다
+        
+        [예시]
+        - 화면 표시: name
+        - 실제 값: description
+
+        [주의]
+        - DB 연결(db_conn)은 전역 변수로 가정합니다.
+        - 콤보박스 이름, 테이블/컬럼명은 실제 환경에 맞게 수정해야 합니다.
+        """
+        if not db_conn:
+            print("DB 연결이 필요합니다.")
+            return  
+        try:
+            cursor = db_conn.cursor()
+            # FontStyle 테이블에서 name, description 조회
+            cursor.execute("SELECT name, description FROM FontStyle ORDER BY id ASC")
+            rows = cursor.fetchall()
+            # 콤보박스에 넣을 label, value 리스트 생성
+            label_list = []  # 콤보박스에 표시될 텍스트
+            value_list = []  # 실제 값(description)
+            for name, description in rows:
+                label_list.append(name)
+                value_list.append(description)
+            # comboBox_CharsWeight1 ~ comboBox_CharsWeight7, comboBox_BracketsWeight1 ~ comboBox_BracketsWeight7에 데이터 채우기
+            for prefix in ["comboBox_CharsWeight", "comboBox_BracketsWeight"]:
+                for i in range(1, 8):
+                    combo_name = f"{prefix}{i}"
+                    combo = getattr(self, combo_name, None)
+                    print(f"{combo_name=}, {combo=}")
+                    if combo is not None:
+                        print(f"{combo_name} 진입")
+                        combo.clear()  # 기존 항목 모두 삭제
+                        # label_list와 value_list를 함께 추가
+                        for label, value in zip(label_list, value_list):
+                            combo.addItem(label, value)
+                        # 펼쳐지는 목록의 최대 표시 항목 수(height) 조절
+                        combo.setMaxVisibleItems(15)
+                        # 펼쳐지는 목록의 width를 내용에 맞게 자동 확장
+                        try:
+                            min_width = max(combo.width(), combo.view().sizeHintForColumn(0) + 30)
+                            combo.view().setMinimumWidth(min_width)
+                        except Exception as e:
+                            print(f"{combo_name} width 조절 오류: {e}")
+                        # 기본값을 Normal로 설정 (없으면 첫번째 항목)
+                        index = combo.findText("Normal")
+                        if index != -1:
+                            combo.setCurrentIndex(index)
+                        else:
+                            combo.setCurrentIndex(0)
+        except Exception as e:
+            print(f"콤보박스 데이터 로드 오류: {e}")
+                            
+            
+    
     def __init__(self):
         """
         MainWindow 생성자
@@ -392,6 +639,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # 이벤트 연결
         self.connect_events()
 
+        # label_CoverImage 더블클릭 이벤트 필터 등록
+        label_cover = getattr(self, "label_CoverImage", None)
+        if label_cover is not None:
+            label_cover.installEventFilter(self)
+
     # [중첩 정의 오류 수정]
     # init_ui, connect_events 함수는 반드시 MainWindow 클래스의 최상위 레벨(다른 메서드들과 같은 들여쓰기)로 정의해야 self.init_ui(), self.connect_events() 호출이 정상 동작함.
     def init_ui(self):
@@ -401,7 +653,12 @@ class MainWindow(QtWidgets.QMainWindow):
         - 콤보박스(정규식) 자동 채우기
         """
         # 콤보박스에 DB 데이터 자동 채우기
-        self.setCombobox()
+        self.setCombobox() # 콤보박스-정규식 연동 함수 호출
+        
+        self.setComboboxAlign() # 콤보박스-정렬스타일 연동 함수 호출
+        
+        self.setComboboxWeight() # 콤보박스-폰트스타일 연동 함수 호출
+        
         # 콤보박스-체크박스 연동 함수 호출
         self.setup_regex_combobox_enabling()
         # 폰트 동기화 체크박스 연동 함수 호출
@@ -412,6 +669,11 @@ class MainWindow(QtWidgets.QMainWindow):
         #     self.progressBar_FileConversion.setRange(0, 100)
         # if hasattr(self, 'pushButton_Cancel'):
         #     self.pushButton_Cancel.setVisible(False)
+        
+        # 폼이 열릴때 '메타데이터' 탭이 기본으로 되게
+        tab_widget = getattr(self, "tabWidget", None)
+        if tab_widget is not None:
+            tab_widget.setCurrentIndex(0)
 
 
     def connect_events(self):
@@ -431,18 +693,92 @@ class MainWindow(QtWidgets.QMainWindow):
         btn_selectfile = getattr(self, "pushButton_SelectTextFile", None)
         if btn_selectfile is not None:
                 btn_selectfile.clicked.connect(self.select_text_file)
+       
         # 본문 폰트 선택 버튼 (getattr + None 체크)
         btn_bodyfont = getattr(self, "pushButton_SelectBodyFont", None)
         if btn_bodyfont is not None:
                 btn_bodyfont.clicked.connect(self.select_body_font)
         # 챕터 폰트 선택 버튼 (getattr + None 체크, checkBox_FontSync 연동 제외)
+      
         btn_chapterfont = getattr(self, "pushButton_SelectChapterFont", None)
         if btn_chapterfont is not None:
                 btn_chapterfont.clicked.connect(self.select_chapter_font)
+      
+        # 커버 이미지 선택 버튼
+        btn_selectcover = getattr(self, "pushButton_SelectCoverImage", None)
+        if btn_selectcover is not None:
+            btn_selectcover.clicked.connect(self.select_cover_image)
+       
         # (예시) 취소 버튼: 실제 UI에 없으므로 getattr로 접근하지 않음
         # btn_cancel = getattr(self, 'pushButton_Cancel', None)
         # if btn_cancel is not None:
         #     btn_cancel.clicked.connect(self.cancel_conversion)
+      
+        # chapter image 선택 버튼
+        btn_selectchapterimage = getattr(self, "pushButton_SelectChapterImage", None)
+        if btn_selectchapterimage is not None:
+            btn_selectchapterimage.clicked.connect(self.select_chapter_image)
+            
+        # cover image clear 버튼
+        btn_clearcoverimage = getattr(self, "pushButton_DeleteCoverImage", None)
+        if btn_clearcoverimage is not None:
+            btn_clearcoverimage.clicked.connect(lambda: self.clear_cover_image(None))   
+        
+        # chapter image clear 버튼
+        btn_clearchapterimage = getattr(self, "pushButton_DeleteChapterImage", None)
+        if btn_clearchapterimage is not None:
+            btn_clearchapterimage.clicked.connect(lambda: self.clear_chapter_image(None))
+         
+        # pushButton_FindChapterList 클릭 이벤트 연결
+        btn_findchapterlist = getattr(self, "pushButton_FindChapterList", None)
+        if btn_findchapterlist is not None:
+            btn_findchapterlist.clicked.connect(self.find_chapter_list)
+         
+         # 정규식 추가 버튼
+        btn_addregex = getattr(self, "pushButton_AddChapterRegEx", None)
+        if btn_addregex is not None:
+            btn_addregex.clicked.connect(self.add_chapter_regex)
+         
+    def add_chapter_regex(self):
+        """
+        pushButton_AddChapterRegEx 클릭 시 lineEdit_RegExExample, lineEdit_RegEx의 값을
+        ChapterRegex 테이블에 저장하고, 콤보박스(1~9)를 즉시 갱신
+        """
+        # DB 연결 확인
+        global db_conn
+        if db_conn is None:
+            QtWidgets.QMessageBox.warning(self, "DB 오류", "데이터베이스 연결이 필요합니다.")
+            return
+        # 입력값 가져오기
+        example = getattr(self, "lineEdit_RegExExample", None)
+        pattern = getattr(self, "lineEdit_RegEx", None)
+        if example is None or pattern is None:
+            QtWidgets.QMessageBox.warning(self, "입력 오류", "입력 위젯을 찾을 수 없습니다.")
+            return
+        example_text = example.text().strip()
+        pattern_text = pattern.text().strip()
+        if not pattern_text:
+            QtWidgets.QMessageBox.warning(self, "입력 오류", "정규식 패턴을 입력하세요.")
+            return
+        # name: '정규식 NN' (NN = 2자리수, 현재 최대값+1)
+        try:
+            cursor = db_conn.cursor()
+            cursor.execute("SELECT MAX(id) FROM ChapterRegex")
+            max_id = cursor.fetchone()[0]
+            next_num = (max_id + 1) if max_id is not None else 1
+            name = f"정규식 {next_num:02d}"
+            cursor.execute(
+                "INSERT INTO ChapterRegex (name, example, pattern, is_enabled) VALUES (?, ?, ?, 1)",
+                (name, example_text, pattern_text)
+            )
+            db_conn.commit()
+            cursor.close()
+        except Exception as e:
+            QtWidgets.QMessageBox.warning(self, "DB 오류", f"DB 저장 실패: {e}")
+            return
+        # 콤보박스 즉시 갱신
+        self.setCombobox()
+        QtWidgets.QMessageBox.information(self, "저장 완료", f"{name}이(가) 저장되었습니다.")
 
     def select_text_file(self):
         """
@@ -487,7 +823,16 @@ class MainWindow(QtWidgets.QMainWindow):
         if encoding and encoding.lower() in ['utf-8', 'utf-8-sig', 'ascii']:
             # 변환 불필요, 바로 경로만 표시
             self.label_TextFilePath.setText(file_path)
+            #lineEdit_Title 에 파일명 넣기
+            lineedit_title = getattr(self, "lineEdit_Title", None)
+            if lineedit_title is not None:
+                lineedit_title.setText(os.path.splitext(os.path.basename(file_path))[0])
             return
+        
+        #lineEdit_Title 에 파일명 넣기
+        lineedit_title = getattr(self, "lineEdit_Title", None)
+        if lineedit_title is not None:
+            lineedit_title.setText(os.path.splitext(os.path.basename(file_path))[0])
 
         # 이전 작업이 있다면 취소
         if self.worker and self.worker.isRunning():
@@ -581,6 +926,317 @@ class MainWindow(QtWidgets.QMainWindow):
             if label_info is not None:
                 label_info.setText(f"[Main] 파일 처리 완료: {result_path}")
 
+    def select_cover_image(self):
+        """
+        pushButton_SelectCoverImage 클릭 시 이미지 파일 선택 후 label_CoverImage에 표시
+        """
+        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "커버 이미지 파일 선택",
+            "",
+            "Image Files (*.png *.jpg *.jpeg *.bmp *.gif);;All Files (*)"
+        )
+        if not file_path:
+            return
+        image = QtGui.QImage(file_path)
+        if image.isNull():
+            QtWidgets.QMessageBox.warning(self, "이미지 오류", "이미지 파일을 열 수 없습니다.")
+            return
+        import os
+        name = os.path.basename(file_path)
+        self.set_cover_image(image, name=name)
+    
+    def select_chapter_image(self):
+        """
+        pushButton_SelectChapterImage 클릭 시 이미지 파일 선택 후 label_ChapterImagePath에 경로 표시
+        """
+        file_path, _ = QtWidgets.QFileDialog.getOpenFileName(
+            self,
+            "챕터 이미지 파일 선택",
+            "",
+            "Image Files (*.png *.jpg *.jpeg *.bmp *.gif);;All Files (*)"
+        )
+        if not file_path:
+            return
+        image = QtGui.QImage(file_path)
+        label_path = getattr(self, "label_ChapterImagePath", None)
+        if label_path is not None:
+            label_path.setText(file_path)
+            
+        name = os.path.basename(file_path)
+        self.set_chapter_image(image, name=name)
+    
+    # chapter image clear 함수
+    def clear_chapter_image(self, _):
+        """
+        pushButton_DeleteChapterImage 클릭 시 label_ChapterImage와 label_ChapterImagePath 초기화
+        """
+        self.set_chapter_image(None)
+        label_path = getattr(self, "label_ChapterImagePath", None)
+        if label_path is not None:
+            label_path.clear()
+    
+    # cover image clear 함수
+    def clear_cover_image(self, _):
+        """
+        pushButton_DeleteCoverImage 클릭 시 label_CoverImage와 label_CoverImagePath 초기화
+        """
+        self.set_cover_image(None)
+        label_path = getattr(self, "label_CoverImagePath", None)
+        if label_path is not None:
+            label_path.clear()
+    
+    # 챕터 리스트 찾기 함수
+    # 챕터 리스트 찾기 함수
+    def find_chapter_list(self):
+        """
+        pushButton_FindChapterList 클릭 시 label_TextFilePath에 지정된 텍스트 파일을 한 줄씩 읽어가며
+        checkBox_RegEx1 ~ checkBox_RegEx9 중 체크된 것들에 대해 comboBox_RegEx1 ~ comboBox_RegEx9에서 선택된 정규식으로
+        라인 전체가 매칭되는지 검사하여, 매칭되는 라인이 있으면 tableView_ChapterList에 표시
+        tableView_ChapterList의 컬럼은 '선택', '순번', '챕터명', '줄번호', '삽화', '경로' 으로 구성
+            - '선택' : 체크박스(기본 체크). 헤더 클릭 시 일괄 토글. 개별 토글 가능.
+            - '순번' : 선택된 행만 1부터 재번호 매김. 미선택은 공백.
+            - '챕터명' : 정규식 매칭 라인.
+            - '줄번호' : 원본 파일 라인 번호(1부터).
+            - '삽화' : 버튼(파일 선택 대화상자). 선택 결과는 '경로'에 반영.
+            - '경로' : 초기 공백.
+        label_ChapterCount : "총 조회된 Chapter {총}(선택 {선택})" 형식으로 항상 갱신.
+        """
+        import re
+        from dataclasses import dataclass
+        from PyQt6.QtCore import Qt, QAbstractTableModel, QModelIndex, QVariant, QEvent
+        from PyQt6.QtWidgets import (
+            QTableView, QHeaderView, QFileDialog,
+            QStyledItemDelegate, QApplication, QStyle, QStyleOptionButton
+        )
+
+        USE_FULLMATCH = True  # 전체 일치
+
+        # 1) 파일 경로
+        lbl_path = getattr(self, "label_TextFilePath", None)
+        file_path = lbl_path.text().strip() if lbl_path else ""
+        if not file_path:
+            return
+
+        # 2) 패턴 수집(UserRole 우선)
+        patterns = []
+        for i in range(1, 10):
+            cb = getattr(self, f"checkBox_RegEx{i}", None)
+            combo = getattr(self, f"comboBox_RegEx{i}", None)
+            if not (cb and combo and cb.isChecked()):
+                continue
+            pat = combo.currentData(Qt.ItemDataRole.UserRole) or combo.currentText()
+            pat = (pat or "").strip()
+            if not pat:
+                continue
+            try:
+                patterns.append(re.compile(pat))
+            except re.error as e:
+                print(f"[정규식 오류] #{i}: {pat} -> {e}")
+        if not patterns:
+            return
+
+        # 3) 텍스트 스캔
+        @dataclass
+        class ChapterRow:
+            selected: bool
+            name: str
+            line_no: int
+            path: str  # 삽화 경로(초기 공백)
+
+        rows = []
+        for enc in ("utf-8-sig", "utf-8", "cp949"):
+            try:
+                with open(file_path, "r", encoding=enc, errors="strict") as f:
+                    for ln, raw in enumerate(f, start=1):
+                        line = raw.rstrip("\r\n")
+                        if any((p.fullmatch(line) if USE_FULLMATCH else p.search(line)) for p in patterns):
+                            rows.append(ChapterRow(True, line, ln, ""))
+                break
+            except UnicodeError:
+                continue
+
+        # 4) 모델
+        class ChapterTableModel(QAbstractTableModel):
+            HEADERS = ['선택', '순번', '챕터명', '줄번호', '삽화', '경로']
+
+            def __init__(self, data, on_selection_changed=None):
+                super().__init__()
+                self._data = data
+                self._on_selection_changed = on_selection_changed  # 라벨 갱신 콜백
+
+            def rowCount(self, parent=QModelIndex()): return len(self._data)
+            def columnCount(self, parent=QModelIndex()): return len(self.HEADERS)
+
+            def selected_count(self) -> int:
+                return sum(1 for r in self._data if r.selected)
+
+            def _seq_for_row(self, row_idx: int):
+                if not self._data[row_idx].selected:
+                    return ""
+                cnt = 0
+                for i in range(0, row_idx + 1):
+                    if self._data[i].selected:
+                        cnt += 1
+                return cnt
+
+            def data(self, index, role=Qt.ItemDataRole.DisplayRole):
+                if not index.isValid(): return QVariant()
+                r, c = index.row(), index.column()
+                it = self._data[r]
+
+                if role == Qt.ItemDataRole.DisplayRole:
+                    if c == 1:  return self._seq_for_row(r)
+                    if c == 2:  return it.name
+                    if c == 3:  return it.line_no
+                    if c == 4:  return ""     # 버튼은 텍스트 없음
+                    if c == 5:  return it.path
+                    return ""
+
+                if role == Qt.ItemDataRole.CheckStateRole and c == 0:
+                    return Qt.CheckState.Checked if it.selected else Qt.CheckState.Unchecked
+
+                if role == Qt.ItemDataRole.TextAlignmentRole:
+                    if c == 0: return Qt.AlignmentFlag.AlignCenter
+                    if c in (1, 3): return Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter
+                    return Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter
+
+                return QVariant()
+
+            def setData(self, index, value, role=Qt.ItemDataRole.EditRole):
+                if not index.isValid(): return False
+                r, c = index.row(), index.column()
+
+                # 체크박스 토글
+                if c == 0 and role == Qt.ItemDataRole.CheckStateRole:
+                    self._data[r].selected = (value == Qt.CheckState.Checked)
+                    self.dataChanged.emit(index, index, [Qt.ItemDataRole.CheckStateRole])
+                    self._emit_seq_changed_all()
+                    if self._on_selection_changed: self._on_selection_changed()
+                    return True
+
+                # 경로 편집
+                if c == 5 and role == Qt.ItemDataRole.EditRole:
+                    self._data[r].path = value or ""
+                    self.dataChanged.emit(index, index, [Qt.ItemDataRole.DisplayRole])
+                    return True
+
+                return False
+
+            def flags(self, index):
+                if not index or not index.isValid():
+                    return Qt.ItemFlag.NoItemFlags
+                base = Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable
+                if index.column() == 0:
+                    return base | Qt.ItemFlag.ItemIsUserCheckable
+                return base
+
+
+            def headerData(self, s, o, role=Qt.ItemDataRole.DisplayRole):
+                if o==Qt.Orientation.Horizontal and role==Qt.ItemDataRole.DisplayRole: return self.HEADERS[s]
+                return QVariant()
+
+            def _emit_seq_changed_all(self):
+                if self.rowCount()==0: return
+                self.dataChanged.emit(self.index(0,1), self.index(self.rowCount()-1,1), [Qt.ItemDataRole.DisplayRole])
+
+            def set_all_selected(self, checked: bool):
+                if self.rowCount()==0: return
+                for r in range(self.rowCount()):
+                    self._data[r].selected = checked
+                self.dataChanged.emit(self.index(0,0), self.index(self.rowCount()-1,0), [Qt.ItemDataRole.CheckStateRole])
+                self._emit_seq_changed_all()
+                if self._on_selection_changed: self._on_selection_changed()
+
+            def are_all_selected(self) -> bool:
+                return self.rowCount()>0 and all(x.selected for x in self._data)
+
+        # 5) 델리게이트들
+        class CheckBoxDelegate(QStyledItemDelegate):
+            def editorEvent(self, event, model, option, index):
+                if index.column()!=0: return False
+                # 클릭 즉시 토글
+                if event.type()==QEvent.Type.MouseButtonPress and event.button()==Qt.MouseButton.LeftButton:
+                    cur = model.data(index, Qt.ItemDataRole.CheckStateRole)
+                    new = Qt.CheckState.Unchecked if cur==Qt.CheckState.Checked else Qt.CheckState.Checked
+                    return model.setData(index, new, Qt.ItemDataRole.CheckStateRole)
+                # Space 키 토글
+                if event.type()==QEvent.Type.KeyPress and event.key()==Qt.Key.Key_Space:
+                    cur = model.data(index, Qt.ItemDataRole.CheckStateRole)
+                    new = Qt.CheckState.Unchecked if cur==Qt.CheckState.Checked else Qt.CheckState.Checked
+                    return model.setData(index, new, Qt.ItemDataRole.CheckStateRole)
+                return False
+
+        class IllustButtonDelegate(QStyledItemDelegate):
+            def __init__(self, on_pick, parent=None):
+                super().__init__(parent); self.on_pick = on_pick
+            def paint(self, painter, option, index):
+                btn = QStyleOptionButton()
+                btn.rect = option.rect.adjusted(6,4,-6,-4)
+                btn.text = "삽화 선택"
+                btn.state = QStyle.StateFlag.State_Enabled
+                QApplication.style().drawControl(QStyle.ControlElement.CE_PushButton, btn, painter)
+            def editorEvent(self, event, model, option, index):
+                if event.type()==QEvent.Type.MouseButtonPress and event.button()==Qt.MouseButton.LeftButton:
+                    self.on_pick(index.row()); return True
+                return False
+            def createEditor(self, parent, option, index): return None
+
+        # 6) 뷰 연결
+        table: QTableView = getattr(self, "tableView_ChapterList", None)
+        if table is None: return
+
+        # 라벨 콜백 정의
+        lbl_cnt = getattr(self, "label_ChapterCount", None)
+        model = None
+        
+        def update_count_label():
+            if lbl_cnt and model:
+                sel = model.selected_count()
+                lbl_cnt.setText(f"총 선택된 Chapter {model.selected_count()}")
+                # 예: 선택 0개면 회색, 그 외 파랑
+                #lbl_cnt.setStyleSheet("color: #9e9e9e;" if sel == 0 else "color: #1976d2;")
+
+        # 모델 생성 및 콜백 주입
+        model = ChapterTableModel(rows, on_selection_changed=update_count_label)
+
+        table.setModel(model)  # ← tableView_ChapterList에 데이터 연결
+        table.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
+        table.setSelectionMode(QTableView.SelectionMode.SingleSelection)
+
+        header = table.horizontalHeader()
+        header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)  # 마우스 조정 가능
+        for col, w in {0:60, 1:60, 2:320, 3:80, 4:110, 5:480}.items():
+            header.resizeSection(col, w)
+        table.verticalHeader().setVisible(False)
+
+        table.setItemDelegateForColumn(0, CheckBoxDelegate(table))
+
+        def pick_image_for_row(row:int):
+            file, _ = QFileDialog.getOpenFileName(
+                table, "삽화 이미지 선택", "",
+                "이미지 파일 (*.png *.jpg *.jpeg *.webp *.bmp);;모든 파일 (*.*)"
+            )
+            if file:
+                model.setData(model.index(row,5), file, Qt.ItemDataRole.EditRole)
+
+        table.setItemDelegateForColumn(4, IllustButtonDelegate(pick_image_for_row, table))
+
+        # 헤더 '선택' 클릭 시 일괄 토글
+        def on_header_clicked(section:int):
+            if section==0:
+                model.set_all_selected(not model.are_all_selected())
+        header.sectionClicked.connect(on_header_clicked)
+
+        # 최초 1회 라벨 갱신
+        update_count_label()
+
+
+
+
+
+
+    
 ########################################################
 # 5. 유틸리티 함수 정의 영역
 ########################################################
@@ -607,7 +1263,21 @@ def set_window_geometry(window, x=100, y=100, width=DEFAULT_WINDOW_WIDTH, height
         new_x = min(screen_geo.x() + x, max_x)
         new_y = min(screen_geo.y() + y, max_y)
         
-        window.setGeometry(new_x, new_y, width, height)
+        ## 윈도우 에서 정중앙에 위치하게 new_x, new_y 계산
+        #new_x = max(new_x, screen_geo.x())
+        #new_y = max(new_y, screen_geo.y())
+        
+        ## 윈도우의 가운데 좌표구하기
+        #center_x = new_x + width // 2
+        #center_y = new_y + height // 2
+        
+        # 윈도우 height 의 80%가 되게 hegith 조정
+        if height < screen_geo.height() * 0.8:
+            height = int(screen_geo.height() * 0.8)
+        
+        # 화면 중앙에 창을 위치시킴
+        center_x = screen_geo.x() + (screen_geo.width() - width) // 2
+        window.setGeometry(center_x, new_y, width, height)
     else:
         window.setGeometry(x, y, width, height)
 
